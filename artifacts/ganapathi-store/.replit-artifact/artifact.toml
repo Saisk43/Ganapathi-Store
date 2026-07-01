@@ -1,0 +1,31 @@
+kind = "web"
+previewPath = "/"
+title = "Ganapathi Store"
+version = "1.0.0"
+id = "artifacts/ganapathi-store"
+router = "path"
+
+[[integratedSkills]]
+name = "react-vite"
+version = "1.0.0"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 18718
+
+[services.development]
+run = "pnpm --filter @workspace/ganapathi-store run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/ganapathi-store", "run", "build" ]
+publicDir = "artifacts/ganapathi-store/dist/public"
+serve = "static"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "18718"
+BASE_PATH = "/"
